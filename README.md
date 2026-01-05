@@ -1,16 +1,50 @@
-# trackside
+# Trackside - AI Context
 
-A new Flutter project.
+Trackside is a free, open-source Formula 1 historical data displayer built with Flutter. It leverages the [OpenF1 API](https://openf1.org/) to provide real-time and historical race data, including telemetry, timing, and driver information.
 
-## Getting Started
+## Architecture: MVVM + Repository Pattern
 
-This project is a starting point for a Flutter application.
+The project follows a strict separation of concerns using the MVVM pattern combined with Repositories.
 
-A few resources to get you started if this is your first Flutter project:
+### Folder Structure (`lib/`)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **`core/`**: Infrastructure and universally shared logic.
+  - `network/`: Dio client configuration.
+  - `router/`: GoRouter configuration.
+  - `services/`: Abstracted services (Database, etc.).
+  - `theme/`: App theming.
+  - `utils/`: Helpers (Logger, extensions).
+- **`features/`**: Feature-specific code.
+  - `[feature_name]/`
+    - `data/`:
+      - `models/`: Data models (Freezed, JsonSerializable).
+      - `repositories/`: Implementations of repositories.
+    - `presentation/`
+      - `providers/`: State management (Riverpod ViewModels/Providers).
+      - `widgets/`: Feature-specific Reusable widgets.
+      - `views/`: Screens/Pages.
+- **`shared/`**: Common widgets and providers used across features.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Key Libraries
+
+- **State Management**: `flutter_riverpod`
+- **Routing**: `go_router`
+- **Networking**: `dio`
+- **Database**: abstract `DatabaseService` (implementations for Stub/Supabase/Firebase)
+- **Utils**: `logger`, `dartx`
+- **Code Generation**: `freezed`, `json_serializable`
+
+## Coding Standards
+
+- **Linting**: Strict rules via `very_good_analysis`.
+- **Async**: centralized error handling in Repositories/Services.
+- **Models**: Always use `freezed` for immutable data models.
+
+## Setup
+
+- **Run**: `flutter run`
+- **Generate Code**: `flutter pub run build_runner build --delete-conflicting-outputs`
+
+## Disclaimer
+
+Trackside is an unofficial project and is not associated in any way with the Formula 1 companies. F1, FORMULA ONE, FORMULA 1, FIA FORMULA ONE WORLD CHAMPIONSHIP, GRAND PRIX and related marks are trade marks of Formula One Licensing B.V.

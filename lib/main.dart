@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_3d_controller/flutter_3d_controller.dart';
+import 'package:trackside/shared/widgets/disclaimer_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -53,6 +54,7 @@ class _MonzaPOCState extends State<MonzaPOC> {
           progressBarColor: Colors.white,
         ),
       ),
+      bottomSheet: const DisclaimerWidget(),
     );
   }
 }
